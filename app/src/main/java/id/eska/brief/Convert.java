@@ -53,19 +53,20 @@ final class Convert {
         private final ArrayBlockingQueue<Item> queue = new ArrayBlockingQueue<>(256);
         private final AtomicReference<Throwable> error = new AtomicReference<>();
         private final Thread worker;
+        private volatile boolean aborted;
         private boolean closed;
 
         AsyncSink(Signal.Sink target) {
             worker = new Thread(() -> {
                 try {
                     try { android.os.Process.setThreadPriority(-6); } catch (Throwable ignored) {}
-                    while (true) {
+                    while (!aborted && !Thread.currentThread().isInterrupted()) {
                         Item item = queue.take();
-                        if (item == EOF) break;
+                        if (item == EOF || aborted) break;
                         target.put(item.frame, item.quiet);
                     }
                 } catch (Throwable t) {
-                    error.compareAndSet(null, t);
+                    if (!aborted) error.compareAndSet(null, t);
                     queue.clear();
                 }
             }, "audio-encode");
@@ -82,7 +83,7 @@ final class Convert {
         public void put(short[] frame, boolean quiet) throws Exception {
             checkError();
             Item item = new Item(frame, quiet);
-            while (!queue.offer(item, 50, TimeUnit.MILLISECONDS)) {
+            while (!aborted && !queue.offer(item, 50, TimeUnit.MILLISECONDS)) {
                 checkError();
             }
         }
@@ -90,16 +91,34 @@ final class Convert {
         void finish() throws Exception {
             if (closed) return;
             closed = true;
-            while (error.get() == null && !queue.offer(EOF, 50, TimeUnit.MILLISECONDS)) {}
-            try { worker.join(); } catch (InterruptedException e) { Thread.currentThread().interrupt(); throw new IOException("Conversion cancelled.", e); }
+            while (!aborted && error.get() == null && !queue.offer(EOF, 50, TimeUnit.MILLISECONDS)) {}
+            try { worker.join(); } catch (InterruptedException e) {
+                aborted = true;
+                queue.clear();
+                worker.interrupt();
+                awaitWorkerExit();
+                Thread.currentThread().interrupt();
+                throw new IOException("Conversion cancelled.", e);
+            }
             checkError();
         }
 
         public void close() {
             if (closed) return;
             closed = true;
+            aborted = true;
+            queue.clear();
             worker.interrupt();
-            try { worker.join(2000); } catch (InterruptedException ignored) { Thread.currentThread().interrupt(); }
+            awaitWorkerExit();
+        }
+
+        private void awaitWorkerExit() {
+            boolean interrupted = false;
+            while (worker.isAlive()) {
+                try { worker.join(); }
+                catch (InterruptedException e) { interrupted = true; }
+            }
+            if (interrupted) Thread.currentThread().interrupt();
         }
     }
 

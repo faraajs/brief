@@ -3,8 +3,10 @@ set -euo pipefail
 cd "$(dirname "$0")/.."
 export ANDROID_HOME="${ANDROID_HOME:-$HOME/Android/Sdk}"
 
-# Build release classes if not present so R.class and dependencies are available.
-if [[ ! -d app/build/intermediates/javac/release/compileReleaseJavaWithJavac/classes ]]; then
+# Always run compileReleaseJavaWithJavac so Gradle rebuilds edited sources incrementally.
+if command -v heavy-lock >/dev/null 2>&1; then
+  heavy-lock ./gradlew :app:compileReleaseJavaWithJavac
+else
   ./gradlew :app:compileReleaseJavaWithJavac
 fi
 

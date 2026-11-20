@@ -112,12 +112,37 @@ public class SignalTest {
         for (int i = 0; i < orig.length; i++) maxErr = Math.max(maxErr, Math.abs(re[i] - orig[i]));
         check(maxErr < 1e-4f, "FFT roundtrip error: " + maxErr);
     }
+    static void asyncSinkCloseWaitsForWorker() throws Exception {
+        java.util.concurrent.CountDownLatch entered = new java.util.concurrent.CountDownLatch(1);
+        java.util.concurrent.atomic.AtomicBoolean inFlight = new java.util.concurrent.atomic.AtomicBoolean();
+        java.util.concurrent.atomic.AtomicInteger processed = new java.util.concurrent.atomic.AtomicInteger();
+        Convert.AsyncSink async = new Convert.AsyncSink((f, q) -> {
+            inFlight.set(true);
+            entered.countDown();
+            try {
+                // Simulate a native MediaCodec call that does not exit on interrupt for >200 ms.
+                long end = System.nanoTime() + 250_000_000L;
+                while (System.nanoTime() < end) { Thread.yield(); }
+                processed.incrementAndGet();
+            } finally {
+                inFlight.set(false);
+            }
+        });
+        async.put(frame(100), false);
+        async.put(frame(200), false);
+        async.put(frame(300), false);
+        check(entered.await(2, java.util.concurrent.TimeUnit.SECONDS), "worker did not start");
+        async.close();
+        check(!inFlight.get(), "close returned while encoder worker was still writing");
+        check(processed.get() == 1, "aborted queue kept processing frames: " + processed.get());
+    }
     public static void main(String[] args) throws Exception {
         gap(96,true,96); gap(104,true,30); gap(400,true,30); gap(400,false,400);
         fanNoiseTrimmed();
         quietSpeechPreserved();
         voiceClarity();
         fftRoundTrip();
+        asyncSinkCloseWaitsForWorker();
         for (int rate:new int[]{8000,16000,32000,44100,48000}) {
             for (int ch:new int[]{1,2}) {
                 int[] samples={0}; long[] sum={0};

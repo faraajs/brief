@@ -40,6 +40,7 @@ final class Encoder implements AutoCloseable {
     }
     private int input() throws Exception {
         for (int tries=0;tries<2500;tries++) {
+            if (Thread.currentThread().isInterrupted()) throw new IOException("Conversion cancelled.");
             int id=codec.dequeueInputBuffer(2000);
             if (id>=0) return id;
             drain(false);
@@ -61,6 +62,7 @@ final class Encoder implements AutoCloseable {
     private void drain(boolean untilEnd) throws Exception {
         int idle=0;
         while (true) {
+            if (Thread.currentThread().isInterrupted()) throw new IOException("Conversion cancelled.");
             int id=codec.dequeueOutputBuffer(info,untilEnd ? 10000 : 0);
             if (id==MediaCodec.INFO_TRY_AGAIN_LATER) {
                 if (!untilEnd) return;
