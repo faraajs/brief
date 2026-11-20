@@ -1,0 +1,68 @@
+<resources>
+    <string name="app_name">Brief</string>
+    <string name="share_label">Prepare audio</string>
+    <string name="subtitle_pick">Pick a recording from your phone</string>
+    <string name="btn_pick">Choose video or audio</string>
+    <string name="label_destination">Destination</string>
+    <string name="label_format">Audio format</string>
+    <string name="label_processing">Audio processing</string>
+    <string name="opt_trim">Shorten long pauses</string>
+    <string name="opt_clarity">Clarify speaker voice</string>
+    <string name="opt_denoise">Reduce background noise (noisy rooms)</string>
+    <string name="btn_start">Prepare audio</string>
+    <string name="btn_cancel">Cancel</string>
+    <string name="btn_share">Share output</string>
+
+    <string name="profile_notebook">NotebookLM · single file</string>
+    <string name="profile_gemini">Gemini Chat · 9m 50s parts</string>
+    <string name="profile_chatgpt">ChatGPT · 5m 50s parts</string>
+    <string name="profile_grok">Grok · single file</string>
+    <string name="profile_grok_short">Grok · 10 min parts</string>
+
+    <string name="fmt_opus_16">Opus · 16 kbps (Compact)</string>
+    <string name="fmt_opus_12">Opus · 12 kbps (Smallest)</string>
+    <string name="fmt_opus_24">Opus · 24 kbps (Recommended · clear)</string>
+    <string name="fmt_aac_32">M4A · AAC 32 kbps (Small)</string>
+    <string name="fmt_opus_32">Opus · 32 kbps (Comfortable listening)</string>
+    <string name="fmt_aac_48">M4A · AAC 48 kbps (Compatible · clear)</string>
+
+    <string name="dialog_language">Language</string>
+    <string name="lang_chip_auto">Lang: Auto</string>
+    <string name="lang_chip_en">EN</string>
+    <string name="lang_chip_id">ID</string>
+    <string name="lang_opt_auto">System default</string>
+    <string name="lang_opt_en">English</string>
+    <string name="lang_opt_id">Bahasa Indonesia</string>
+
+    <string name="dialog_theme">Theme</string>
+    <string name="theme_chip_auto">Auto</string>
+    <string name="theme_chip_light">Light</string>
+    <string name="theme_chip_dark">Dark</string>
+    <string name="theme_opt_auto">Follow system</string>
+    <string name="theme_opt_light">Light</string>
+    <string name="theme_opt_dark">Dark</string>
+
+    <string name="dialog_share_parts">Choose part to share</string>
+    <string name="chooser_share">Share audio</string>
+    <string name="channel_name">Audio conversion</string>
+    <string name="default_recording">Recording</string>
+
+    <string name="state_reading">Reading audio…</string>
+    <string name="state_processing">Processing %1$s</string>
+    <string name="state_processing_total">Processing %1$s / %2$s</string>
+    <string name="state_done_one">%1$s -> %2$s · %3$.2f MB\n%4$d file in %5$s</string>
+    <string name="state_done_many">%1$s -> %2$s · %3$.2f MB\n%4$d files in %5$s</string>
+
+    <string name="err_no_access">Cannot access this recording. Use Choose video or audio.</string>
+    <string name="err_interrupted">Conversion stopped. Pick a file to try again.</string>
+    <string name="err_cancelled">Conversion cancelled.</string>
+    <string name="err_create_file">Could not create output file in Downloads.</string>
+    <string name="err_size_limit">Output part exceeded destination size limit.</string>
+    <string name="err_save_part">Could not finalize output file.</string>
+    <string name="err_read_media">Could not read media file.</string>
+    <string name="err_no_audio">This file has no audio track.</string>
+    <string name="err_pcm_unsupported">Decoder does not support 16-bit PCM.</string>
+    <string name="err_empty_audio">Audio track is empty.</string>
+    <string name="err_silero_load">Could not load Silero VAD. Turn off pause shortening to keep full audio.</string>
+    <string name="err_gtcrn_load">Could not load noise reducer. Turn off background noise reduction to continue.</string>
+</resources>

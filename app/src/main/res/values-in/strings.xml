@@ -1,0 +1,68 @@
+<resources>
+    <string name="app_name">Brief</string>
+    <string name="share_label">Siapkan audio</string>
+    <string name="subtitle_pick">Pilih rekaman dari HP</string>
+    <string name="btn_pick">Pilih video atau audio</string>
+    <string name="label_destination">Tujuan</string>
+    <string name="label_format">Format audio</string>
+    <string name="label_processing">Pemrosesan audio</string>
+    <string name="opt_trim">Pendekkan jeda panjang</string>
+    <string name="opt_clarity">Perjelas suara pembicara</string>
+    <string name="opt_denoise">Redam bising latar (rekaman ramai)</string>
+    <string name="btn_start">Siapkan audio</string>
+    <string name="btn_cancel">Batalkan</string>
+    <string name="btn_share">Bagikan hasil</string>
+
+    <string name="profile_notebook">NotebookLM · satu file</string>
+    <string name="profile_gemini">Gemini Chat · 9 m 50 d</string>
+    <string name="profile_chatgpt">ChatGPT · 5 m 50 d</string>
+    <string name="profile_grok">Grok · satu file</string>
+    <string name="profile_grok_short">Grok · bagian 10 menit</string>
+
+    <string name="fmt_opus_16">Opus · 16 kbps (Hemat)</string>
+    <string name="fmt_opus_12">Opus · 12 kbps (Ekstra kecil)</string>
+    <string name="fmt_opus_24">Opus · 24 kbps (Disarankan · jelas)</string>
+    <string name="fmt_aac_32">M4A · AAC 32 kbps (Kecil)</string>
+    <string name="fmt_opus_32">Opus · 32 kbps (Nyaman didengar)</string>
+    <string name="fmt_aac_48">M4A · AAC 48 kbps (Kompatibel · jelas)</string>
+
+    <string name="dialog_language">Bahasa</string>
+    <string name="lang_chip_auto">Bahasa: Auto</string>
+    <string name="lang_chip_en">EN</string>
+    <string name="lang_chip_id">ID</string>
+    <string name="lang_opt_auto">Ikuti sistem</string>
+    <string name="lang_opt_en">English</string>
+    <string name="lang_opt_id">Bahasa Indonesia</string>
+
+    <string name="dialog_theme">Tema</string>
+    <string name="theme_chip_auto">Auto</string>
+    <string name="theme_chip_light">Terang</string>
+    <string name="theme_chip_dark">Gelap</string>
+    <string name="theme_opt_auto">Ikuti sistem</string>
+    <string name="theme_opt_light">Terang</string>
+    <string name="theme_opt_dark">Gelap</string>
+
+    <string name="dialog_share_parts">Pilih bagian untuk dibagikan</string>
+    <string name="chooser_share">Bagikan audio</string>
+    <string name="channel_name">Konversi audio</string>
+    <string name="default_recording">Rekaman</string>
+
+    <string name="state_reading">Membaca audio…</string>
+    <string name="state_processing">Memproses %1$s</string>
+    <string name="state_processing_total">Memproses %1$s / %2$s</string>
+    <string name="state_done_one">%1$s -> %2$s · %3$.2f MB\n%4$d file di %5$s</string>
+    <string name="state_done_many">%1$s -> %2$s · %3$.2f MB\n%4$d file di %5$s</string>
+
+    <string name="err_no_access">Akses rekaman tidak tersedia. Gunakan Pilih video atau audio.</string>
+    <string name="err_interrupted">Proses terhenti. Pilih file untuk mencoba lagi.</string>
+    <string name="err_cancelled">Konversi dibatalkan.</string>
+    <string name="err_create_file">Gagal membuat file di Download.</string>
+    <string name="err_size_limit">Ukuran bagian di luar batas tujuan.</string>
+    <string name="err_save_part">Gagal menyimpan file hasil.</string>
+    <string name="err_read_media">Gagal membaca file media.</string>
+    <string name="err_no_audio">File ini tidak memiliki trek audio.</string>
+    <string name="err_pcm_unsupported">Dekoder tidak mendukung PCM 16-bit.</string>
+    <string name="err_empty_audio">Trek audio kosong.</string>
+    <string name="err_silero_load">Silero VAD gagal dimuat. Nonaktifkan pemangkasan jeda untuk menyimpan seluruh audio.</string>
+    <string name="err_gtcrn_load">Peredam bising gagal dimuat. Nonaktifkan redam bising latar untuk melanjutkan.</string>
+</resources>
