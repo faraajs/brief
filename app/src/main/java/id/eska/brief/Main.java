@@ -181,6 +181,7 @@ public final class Main extends Activity implements SharedPreferences.OnSharedPr
         Window w = getWindow();
         w.setStatusBarColor(dark ? bg : 0xffeaf3ef);
         w.setNavigationBarColor(bg);
+        View decor = w.getDecorView();
         if (Build.VERSION.SDK_INT >= 30) {
             WindowInsetsController c = w.getInsetsController();
             if (c != null) {
@@ -190,7 +191,7 @@ public final class Main extends Activity implements SharedPreferences.OnSharedPr
         } else {
             @SuppressWarnings("deprecation")
             int vis = dark ? 0 : View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
-            w.getDecorView().setSystemUiVisibility(vis);
+            decor.setSystemUiVisibility(vis);
         }
     }
 
@@ -200,12 +201,12 @@ public final class Main extends Activity implements SharedPreferences.OnSharedPr
         super.onCreate(saved);
         Job.recover(this);
         prefs = getSharedPreferences(Job.PREF, 0);
-        applySystemBars();
 
         ScrollView scroll = new ScrollView(this);
         scroll.setBackgroundColor(bg);
         scroll.setFitsSystemWindows(true);
         setContentView(scroll);
+        applySystemBars();
 
         LinearLayout body = new LinearLayout(this);
         body.setOrientation(LinearLayout.VERTICAL);

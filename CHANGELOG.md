@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.1
+
+- Fix launch crash on Android 11 to 13 caused by calling `Window.getInsetsController()` before `setContentView()` initialized the decor view.
+
 ## 1.0.0
 
 Initial public release of Brief (`id.eska.brief`).

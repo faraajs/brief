@@ -9,11 +9,11 @@ Convert long videos and voice recordings on Android into small, pause-trimmed au
 
 ## Download
 
-**[Download Brief 1.0.0 APK (7.7 MB, arm64-v8a)](https://github.com/faraajs/brief/releases/download/v1.0.0/Brief-v1.0.0-arm64-v8a.apk)**
+**[Download Brief 1.0.1 APK (7.7 MB, arm64-v8a)](https://github.com/faraajs/brief/releases/download/v1.0.1/Brief-v1.0.1-arm64-v8a.apk)**
 
 Requires Android 10 or newer and a 64-bit `arm64-v8a` device. Download the `.apk` file from the release assets, not GitHub's source code archives.
 
-[Release page and checksums](https://github.com/faraajs/brief/releases/tag/v1.0.0) · [All releases](https://github.com/faraajs/brief/releases)
+[Release page and checksums](https://github.com/faraajs/brief/releases/tag/v1.0.1) · [All releases](https://github.com/faraajs/brief/releases)
 
 ### Verify before installing
 
@@ -23,16 +23,16 @@ Check the downloaded APK against `SHA256SUMS.txt` from the release page:
 sha256sum -c SHA256SUMS.txt
 ```
 
-Expected SHA-256 for `Brief-v1.0.0-arm64-v8a.apk`:
+Expected SHA-256 for `Brief-v1.0.1-arm64-v8a.apk`:
 
 ```text
-020ab7e49b25bf7c1f6d8ee632c83d4aa26d3cd268dcc82357eaad79949ae026
+74b24f48e83b0be112f92f9b49b8df7ce19ae889b5433d90ed3a8a766c65887b
 ```
 
 With Android SDK Build Tools installed, you can also check the signing certificate:
 
 ```sh
-apksigner verify --verbose --print-certs Brief-v1.0.0-arm64-v8a.apk
+apksigner verify --verbose --print-certs Brief-v1.0.1-arm64-v8a.apk
 ```
 
 Official release certificate (`CN=Brief Release, O=Brief`, RSA 3072-bit, APK Signature Scheme v3) SHA-256:
